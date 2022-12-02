@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Blog Template · Bootstrap v5.0</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/blog/">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+    <!-- Custom styles for this template -->
+</head>
+<body>
+
+<div class="container">
+    <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-4 pt-1">
+                <a class="link-secondary" href="#">Subscribe</a>
+            </div>
+            <div class="col-4 text-center">
+                <a class="blog-header-logo text-dark" href="/home.html">JAVA Medicine | Health Care </a>
+            </div>
+            <div class="col-4 d-flex justify-content-end align-items-center">
+                <a class="link-secondary" href="#" aria-label="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
+                </a>
+                <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="nav-scroller py-1 mb-2">
+        <nav class="nav d-flex justify-content-between">
+            <a href="./patienthome.html" class="p-2 link-secondary"> MyHealth </a>
+<!--            <a href="./doctorhome.html" class="p-2 link-secondary"> Doctors </a>-->
+            <a href="./pharmacyhome.html" class="p-2 link-secondary"> Pharmacy & Locations </a>
+        </nav>
+    </div>
+</div>
+
+
+
+<main class="container">
+
+    <!--    Create an appointment-->
+    <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+        <div class="col-md-12 px-0">
+            <h1 class="display-4 fst-italic">Make Appointment </h1>
+            <p class="lead my-3">my appointment Invitations</p>
+            <div class="container" id="home-container">
+                <div class="row">
+                    <div id="request-form-container">
+                        <div class="col-md-6 offset-md-1 container">
+                            <div class="container-inner">
+                                <h3>Schedule an appointment</h3>
+                                <form id="request-form">
+                                    <h4>1. Select a Specialty</h4>
+                                    <!--<input type="text" class="form-control" id="email-phone" placeholder="Email or Phone Number">-->
+                                    <select class="form-control" id="department">
+                                        <option value="Dermatology">Dermatology</option>
+                                        <option value="Express Care">Express Care</option>
+                                        <option value="OBGYN">OBGYN</option>
+                                        <option value="Laboratory">Laboratory</option>
+                                        <option value="Orthopedics">Orthopedics</option>
+                                        <option value="Sleep Clinic">Sleep Clinic</option>
+                                    </select>
+
+                                    <h4>2. Select Appointment Type</h4>
+
+                                    <select class="form-control" id="appcategory">
+                                        <option value="Video Visit">Video Visit</option>
+                                        <option value="In-person">In-person</option>
+                                        <option value="In-person first time Appointment">In-person first time Appointment</option>
+                                    </select>
+
+                                    <h4>3. Choose a Doctor</h4>
+
+                                    <select class="form-control" id="doctor">
+                                        <option value="Doctor1">Doctor1</option>
+                                        <option value="Doctor2">Doctor2</option>
+                                        <option value="Doctor3">Doctor3</option>
+                                    </select>
+                                    <!--<input type="number" class="form-control" id="unit" placeholder="Your unit #"></input>-->
+
+                                    <div class="btn-container">
+                                        <button id="submit-button" type="submit" class="btn btn-secondary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+<script src="./javascript/patientappointments.js" type="application/javascript"></script>
+
+</body>
+</html>
