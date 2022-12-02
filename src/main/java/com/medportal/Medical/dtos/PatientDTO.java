@@ -67,4 +67,22 @@ public class PatientDTO {
         }
     }
 
+    @Override
+    public String toString() {
+        return "PatientDTO{" +
+                "id=" + id +
+                ", patientName='" + patientName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", address='" + address + '\'' +
+                ", photo='" + photo + '\'' +
+                ", phone='" + phone + '\'' +
+                ", password='" + password + '\'' +
+                ", assignedDoctor=" + assignedDoctor +
+                ", medicines=" + medicines +
+                ", appointments=" + appointments +
+                '}';
+    }
 }

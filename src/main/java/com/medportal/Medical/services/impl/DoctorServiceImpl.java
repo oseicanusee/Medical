@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -62,22 +63,12 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public DoctorDTO saveDoctor(DoctorDTO doctorDTO) throws UserExistsException {
-        Optional<Doctor> doctorOptional =  doctorRepository.findByEmail(doctorDTO.getEmail());
-        Optional<Doctor> usernameOptional = doctorRepository.findByUsername(doctorDTO.getUsername());
-
-        if(doctorOptional.isPresent()){
-            throw new UserExistsException(doctorDTO.getEmail() + " exists. Please use a new email");
-
-        } else if (usernameOptional.isPresent()){
-            throw new UserExistsException(doctorDTO.getUsername() + " exists. Please use a new username");
-        }
-        else {
+    public List<String> saveDoctor(DoctorDTO doctorDTO) throws UserExistsException {
             Doctor doctor = mapStructMapper.DoctorDTOToToDoctorEntity(doctorDTO);
             doctorRepository.save(doctor);
-            DoctorDTO savedDoctor = mapStructMapper.doctorEntityToDoctorDTO(doctor);
-            return savedDoctor;
-        }
+            List<String> response = new ArrayList<>();
+            response.add("http://localhost:8080/logindoctor.html");
+            return response;
     }
 
 

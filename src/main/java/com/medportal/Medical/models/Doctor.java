@@ -25,13 +25,14 @@ public class Doctor {
     @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "username")
-    private String username;
+
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "doctor_id")
+    @Column(name = "doctor_id", unique = true)
     private String doctor_id;
 
     @Column(name = "email", unique = true)
@@ -45,12 +46,24 @@ public class Doctor {
 
 
     public Doctor(DoctorDTO doctorDTO){
-        this.username = doctorDTO.getUsername();
         this.firstName = doctorDTO.getFirstName();
         this.lastName = doctorDTO.getLastName();
         this.doctor_id = doctorDTO.getDoctor_id();
         this.patientList = doctorDTO.getPatientList();
+        this.password = doctorDTO.getPassword();
     }
 
-
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", password='" + password + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", doctor_id='" + doctor_id + '\'' +
+                ", email='" + email + '\'' +
+                ", patientList=" + patientList +
+                ", appointmentSet=" + appointmentSet +
+                '}';
+    }
 }

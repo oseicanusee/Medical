@@ -26,27 +26,11 @@ public class PatientServiceImpl implements PatientService {
     @Override
     @Transactional
     public List<String> addPatient(PatientDTO patientDto) throws UserExistsException {
-
-        Optional<Patient> patientOptional =  patientRepository.findByEmail(patientDto.getEmail());
-        Optional<Patient> patientNameOptional = patientRepository.findByPatientName(patientDto.getPatientName());
-
-        if(patientNameOptional.isPresent()){
-            throw new UserExistsException(patientDto.getPatientName() + " exists. Please use a new username");
-
-        } else if (patientOptional.isPresent()){
-            throw new UserExistsException(patientDto.getEmail() + " exists. Please use a new email");
-        }
-        else {
-//            Patient patient = new Patient(patientDto);
-//            patientRepository.save(patient);
-//            return new PatientDTO(patient);
             List<String> response = new ArrayList<>();
             Patient patient = new Patient(patientDto);
-            //patientRepository.saveAndFlush(patient);
             patientRepository.save(patient);
             response.add("http://localhost:8080/loginpatient.html");
             return response;
-        }
     }
 
     @Override

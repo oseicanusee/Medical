@@ -14,15 +14,14 @@ const handleSubmit = async (e) =>{
     let bodyObj = {
         patientName: document.getElementById('register-patientName').value,
         firstName: document.getElementById('register-firstName').value,
-        lstName: document.getElementById('register-lastName').value,
+        lastName: document.getElementById('register-lastName').value,
         email: document.getElementById('register-email').value,
         birthDate: document.getElementById('register-birthDate').value,
         address: document.getElementById('register-address').value,
-//        photo
-        phone
+        phone: document.getElementById('register-phone').value,
         password: document.getElementById('register-password')
     }
-    console.log(bodyObj);
+
     //actual request to patients controller
     const response = await fetch(`${baseUrl}/register`, {
         method: "POST",

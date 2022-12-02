@@ -17,21 +17,32 @@ import java.util.List;
 public class DoctorDTO {
 
     private long id;
-    private String username;
     private String firstName;
     private String lastName;
-    private String doctor_id;
+    private String password;
     private List<Patient> patientList;
     private String email;
+    private String doctor_id;
 
     public DoctorDTO(Doctor doctor){
         this.id = doctor.getId();
-        this.username = doctor.getUsername();
         this.firstName = doctor.getFirstName();
         this.lastName = doctor.getLastName();
         this.doctor_id = doctor.getDoctor_id();
         this.patientList = doctor.getPatientList();
+        this.password = doctor.getPassword();
     }
 
-
+    @Override
+    public String toString() {
+        return "DoctorDTO{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                ", doctor_id='" + doctor_id + '\'' +
+                ", patientList=" + patientList +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

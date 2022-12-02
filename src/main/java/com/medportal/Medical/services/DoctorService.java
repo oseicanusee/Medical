@@ -10,5 +10,5 @@ public interface DoctorService {
     List<DoctorDTO> getAllDoctors();
     DoctorDTO findDoctorById(long id);
     DoctorDTO deleteDoctorById(long id);
-    DoctorDTO saveDoctor(DoctorDTO doctorDTO) throws UserExistsException;
+    List<String> saveDoctor(DoctorDTO doctorDTO) throws UserExistsException;
 }
