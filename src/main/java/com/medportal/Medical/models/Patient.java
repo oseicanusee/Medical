@@ -1,20 +1,24 @@
 package com.medportal.Medical.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.medportal.Medical.dtos.PatientDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "Patients")
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Patient {
     // fields go here
 
@@ -49,15 +53,18 @@ public class Patient {
     @Column
     private String password;
 
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //    @JoinColumn(name = "doctor_id", referencedColumnName = "id")
     private Doctor assignedDoctor;
 
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<Prescription> medicines;
 
-    @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonIgnore
+    @OneToMany(mappedBy = "patient", cascade = {CascadeType.ALL})
     private Set<Appointment> appointmentSet = new HashSet<>();
 
     public Patient(PatientDTO patientDto) {
@@ -88,5 +95,24 @@ public class Patient {
         if (patientDto.getPassword() != null) {
             this.password = patientDto.getPassword();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + id +
+                ", patientName='" + patientName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", birthDate='" + birthDate + '\'' +
+                ", address='" + address + '\'' +
+                ", photo='" + photo + '\'' +
+                ", phone='" + phone + '\'' +
+                ", password='" + password + '\'' +
+                ", assignedDoctor=" + assignedDoctor +
+                ", medicines=" + medicines +
+                ", appointmentSet=" + appointmentSet +
+                '}';
     }
 }

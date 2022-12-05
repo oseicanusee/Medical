@@ -39,6 +39,7 @@ public class PatientController {
 
     @PostMapping("/login")
     public List<String> patientLogin(@RequestBody PatientDTO patientDto){
+        logger.info(patientDto.toString());
         return patientService.patientLogin(patientDto);
     }
 

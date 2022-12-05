@@ -3,22 +3,23 @@ package com.medportal.Medical.dtos;
 import com.medportal.Medical.models.Appointment;
 import com.medportal.Medical.models.Doctor;
 import com.medportal.Medical.models.Patient;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Setter
 public class AppointmentDTO {
 
     private Long id;
     private Doctor doctor;
     private Patient patient;
     private String department;
-    private java.sql.Date rDate;
-    private java.sql.Time rTime;
+    private String date;
+    private String time;
     private String appcategory;
     private String status;
 
@@ -35,11 +36,11 @@ public class AppointmentDTO {
         if (appointment.getDepartment() != null) {
             this.department = appointment.getDepartment();
         }
-        if (appointment.getRDate() != null) {
-            this.rDate = appointment.getRDate();
+        if (appointment.getDate() != null) {
+            this.date = appointment.getDate();
         }
-        if (appointment.getRTime() != null) {
-            this.rTime = appointment.getRTime();
+        if (appointment.getTime() != null) {
+            this.time = appointment.getTime();
         }
         if (appointment.getAppcategory() != null) {
             this.appcategory = appointment.getAppcategory();
@@ -47,5 +48,19 @@ public class AppointmentDTO {
         if (appointment.getStatus() != null) {
             this.status = appointment.getStatus();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "AppointmentDTO{" +
+                "id=" + id +
+                ", doctor=" + doctor +
+                ", patient=" + patient +
+                ", department='" + department + '\'' +
+                ", rDate=" + date +
+                ", Time=" + time +
+                ", appcategory='" + appcategory + '\'' +
+                ", status='" + status + '\'' +
+                '}';
     }
 }

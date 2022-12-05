@@ -19,7 +19,7 @@ const handleSubmit = async (e) =>{
         birthDate: document.getElementById('register-birthDate').value,
         address: document.getElementById('register-address').value,
         phone: document.getElementById('register-phone').value,
-        password: document.getElementById('register-password')
+        password: document.getElementById('register-password').value
     }
 
     //actual request to patients controller

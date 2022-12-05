@@ -5,19 +5,15 @@ import com.medportal.Medical.models.Appointment;
 import com.medportal.Medical.models.Doctor;
 import com.medportal.Medical.models.Patient;
 import com.medportal.Medical.models.Prescription;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class PatientDTO {
 
     private Long id;

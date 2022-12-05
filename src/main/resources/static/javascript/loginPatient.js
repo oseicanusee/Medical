@@ -12,7 +12,7 @@ const handleSubmit = async (e) =>{
     e.preventDefault()
 
     let bodyObj = {
-        username: document.getElementById('login-patientName').value, //by input id
+        patientName: document.getElementById('login-patientName').value, //by input id
         password: document.getElementById('login-password').value
     }
 

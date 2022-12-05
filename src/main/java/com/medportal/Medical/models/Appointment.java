@@ -1,29 +1,32 @@
 package com.medportal.Medical.models;
 
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.medportal.Medical.dtos.AppointmentDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 
 @Entity
 @Table(name = "Appointments")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id", referencedColumnName = "id")
+
     private Doctor doctor;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", referencedColumnName = "id")
     private Patient patient;
 
@@ -31,17 +34,15 @@ public class Appointment {
     private String department;
 
     @Column
-    private java.sql.Date rDate;
+    private String date;
 
     @Column
-    private java.sql.Time rTime;
+    private String time;
 
     @Column
-    //Could be new patient or following up appointment
     private String appcategory;
 
     @Column
-    //confirmed or not confirmed
     private String status;
     
 
@@ -50,12 +51,12 @@ public class Appointment {
         if (appointmentDto.getDepartment() != null){
             this.department = appointmentDto.getDepartment();
         }
-        if (appointmentDto.getRDate() != null){
-            this.rDate = appointmentDto.getRDate();
+        if (appointmentDto.getDate() != null){
+            this.date = appointmentDto.getDate();
         }
 
-        if (appointmentDto.getRTime() != null){
-            this.rTime = appointmentDto.getRTime();
+        if (appointmentDto.getTime() != null){
+            this.time = appointmentDto.getTime();
         }
 
         if (appointmentDto.getAppcategory() != null){
@@ -66,4 +67,18 @@ public class Appointment {
             this.status = appointmentDto.getStatus();
         }
     }
+
+//    @Override
+//    public String toString() {
+//        return "Appointment{" +
+//                "id=" + id +
+//                ", doctor=" + doctor +
+//                ", patient=" + patient +
+//                ", department='" + department + '\'' +
+//                ", date='" + date + '\'' +
+//                ", time='" + time + '\'' +
+//                ", appcategory='" + appcategory + '\'' +
+//                ", status='" + status + '\'' +
+//                '}';
+//    }
 }

@@ -64,15 +64,12 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public List<String> saveDoctor(DoctorDTO doctorDTO) throws UserExistsException {
-            Doctor doctor = mapStructMapper.DoctorDTOToToDoctorEntity(doctorDTO);
+           Doctor doctor = mapStructMapper.DoctorDTOToToDoctorEntity(doctorDTO);
             doctorRepository.save(doctor);
             List<String> response = new ArrayList<>();
             response.add("http://localhost:8080/logindoctor.html");
             return response;
     }
-
-
-
 
 }
 

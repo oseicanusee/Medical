@@ -5,12 +5,13 @@ import com.medportal.Medical.models.Patient;
 import com.medportal.Medical.models.Prescription;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Getter
 public class PrescriptionDTO {
 
     private Long id;

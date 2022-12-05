@@ -1,7 +1,6 @@
 package com.medportal.Medical.controllers;
 
 import com.medportal.Medical.dtos.DoctorDTO;
-import com.medportal.Medical.dtos.PatientDTO;
 import com.medportal.Medical.exceptions.UserExistsException;
 import com.medportal.Medical.services.impl.DoctorServiceImpl;
 import org.slf4j.Logger;

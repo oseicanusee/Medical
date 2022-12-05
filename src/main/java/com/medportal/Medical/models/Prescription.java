@@ -3,17 +3,15 @@ package com.medportal.Medical.models;
 
 import com.medportal.Medical.dtos.PrescriptionDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @Entity
 @Table(name = "Prescriptions")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Prescription {
 
     @Id
@@ -72,5 +70,20 @@ public class Prescription {
         if (prescriptionDto.getStatus() != null){
             this.status = prescriptionDto.getStatus();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Prescription{" +
+                "id=" + id +
+                ", doctor=" + doctor +
+                ", patient=" + patient +
+                ", pharmacyName='" + pharmacyName + '\'' +
+                ", drugName='" + drugName + '\'' +
+                ", rStartDate=" + rStartDate +
+                ", rRefillDate=" + rRefillDate +
+                ", numberRefills=" + numberRefills +
+                ", status='" + status + '\'' +
+                '}';
     }
 }

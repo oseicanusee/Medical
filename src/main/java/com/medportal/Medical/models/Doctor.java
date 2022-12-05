@@ -1,7 +1,8 @@
 package com.medportal.Medical.models;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.medportal.Medical.dtos.DoctorDTO;
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,13 +10,12 @@ import lombok.*;
 import java.util.List;
 
 
-@Data
 @Entity
-@Getter
-@Setter
+@Data
 @Table(name = "doctors")
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Doctor {
     // fields go here
     @Id
@@ -26,6 +26,7 @@ public class Doctor {
     private String firstName;
 
 
+    @JsonIgnore
     @Column(name = "password")
     private String password;
 
@@ -38,10 +39,16 @@ public class Doctor {
     @Column(name = "email", unique = true)
     private String email;
 
-    @OneToMany(fetch = FetchType.LAZY)
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Patient> patientList;
 
-    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY,
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<Appointment> appointmentSet;
 
 

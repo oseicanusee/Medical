@@ -12,7 +12,6 @@ import com.medportal.Medical.services.AppointmentService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -60,12 +59,16 @@ public class AppointmentServiceImpl implements AppointmentService {
     public AppointmentDTO addAppointment(AppointmentDTO appointmentDto, Long patientId) {
         Optional<Patient> patientOptional = patientRepository.findById(patientId);
 
-        Optional<Doctor> doctorOptional = doctorRepository.findById((long) 1);
+        Optional<Doctor> doctorOptional = doctorRepository.findById((long) 5);
 
         if(patientOptional.isPresent()){
             Patient patient = patientOptional.get();
             Appointment appointment = new Appointment(appointmentDto);
+            appointment.setDoctor(doctorOptional.get());
+            appointment.setPatient(patientOptional.get());
             patient.getAppointmentSet().add(appointment);
+            doctorOptional.get().getAppointmentSet().add(appointment);
+            doctorRepository.save(doctorOptional.get());
             appointmentRepository.save(appointment);
             patientRepository.save(patient);
             return new AppointmentDTO(appointment);
@@ -108,9 +111,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentOptional.ifPresent(appointment -> {
 
             appointment.setDepartment(appointmentDto.getDepartment());
-            appointment.setRDate(appointmentDto.getRDate());
-            appointment.setRTime(appointmentDto.getRTime());
-            appointment.setRTime(appointmentDto.getRTime());
+            appointment.setDate(appointmentDto.getDate());
+            appointment.setTime(appointmentDto.getTime());
+            appointment.setTime(appointmentDto.getTime());
             appointment.setAppcategory(appointmentDto.getAppcategory());
             appointmentRepository.saveAndFlush(appointment);
         });
