@@ -39,16 +39,15 @@ public class Doctor {
     @Column(name = "email", unique = true)
     private String email;
 
-
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+            cascade = {CascadeType.ALL})
     private List<Patient> patientList;
 
 
     @JsonIgnore
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY,
-            cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+            cascade = CascadeType.ALL)
     private List<Appointment> appointmentSet;
 
 

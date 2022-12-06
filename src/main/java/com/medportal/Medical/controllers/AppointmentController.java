@@ -64,4 +64,6 @@ public class AppointmentController {
     public void updateAppointment(@RequestBody AppointmentDTO appointmentDto){
         appointmentService.updateAppointmentById(appointmentDto);
     }
+
+
 }

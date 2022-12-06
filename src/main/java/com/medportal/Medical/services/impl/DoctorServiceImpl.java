@@ -6,6 +6,7 @@ import com.medportal.Medical.exceptions.ResourceNotFoundException;
 import com.medportal.Medical.exceptions.UserExistsException;
 import com.medportal.Medical.models.Doctor;
 import com.medportal.Medical.repository.DoctorRepository;
+import com.medportal.Medical.response.DoctorResponse;
 import com.medportal.Medical.services.DoctorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,24 @@ public class DoctorServiceImpl implements DoctorService {
                         mapStructMapper.doctorEntityToDoctorDTO(doctor))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public  List<DoctorResponse> getAllDoctorsForAppointments() {
+        //gets all the doctors from the database and maps them to DTOs.
+        List<DoctorResponse> doctorResponses = new ArrayList<>();
+        List<Doctor> doctors = doctorRepository.findAll();
+        for(Doctor doctor : doctors){
+            DoctorResponse doctorResponse = new DoctorResponse();
+            doctorResponse.setId(doctor.getId());
+            doctorResponse.setFirstName(doctor.getFirstName());
+            doctorResponse.setLastName(doctor.getLastName());
+            doctorResponses.add(doctorResponse);
+        }
+
+        return doctorResponses;
+    }
+
+
 
     @Override
     public DoctorDTO findDoctorById(long id) {

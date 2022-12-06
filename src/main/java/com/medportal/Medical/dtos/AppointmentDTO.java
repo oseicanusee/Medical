@@ -3,10 +3,8 @@ package com.medportal.Medical.dtos;
 import com.medportal.Medical.models.Appointment;
 import com.medportal.Medical.models.Doctor;
 import com.medportal.Medical.models.Patient;
+import com.medportal.Medical.response.DoctorResponse;
 import lombok.*;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Getter
 @AllArgsConstructor
@@ -16,6 +14,7 @@ public class AppointmentDTO {
 
     private Long id;
     private Doctor doctor;
+    private long doctor_id;
     private Patient patient;
     private String department;
     private String date;
@@ -55,10 +54,11 @@ public class AppointmentDTO {
         return "AppointmentDTO{" +
                 "id=" + id +
                 ", doctor=" + doctor +
+                ", doctor_id=" + doctor_id +
                 ", patient=" + patient +
                 ", department='" + department + '\'' +
-                ", rDate=" + date +
-                ", Time=" + time +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
                 ", appcategory='" + appcategory + '\'' +
                 ", status='" + status + '\'' +
                 '}';

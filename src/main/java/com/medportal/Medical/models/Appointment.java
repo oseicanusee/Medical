@@ -1,9 +1,6 @@
 package com.medportal.Medical.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.medportal.Medical.dtos.AppointmentDTO;
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,7 +20,6 @@ public class Appointment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id", referencedColumnName = "id")
-
     private Doctor doctor;
 
     @ManyToOne(fetch = FetchType.LAZY)

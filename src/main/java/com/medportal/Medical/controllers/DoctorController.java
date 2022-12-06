@@ -2,6 +2,7 @@ package com.medportal.Medical.controllers;
 
 import com.medportal.Medical.dtos.DoctorDTO;
 import com.medportal.Medical.exceptions.UserExistsException;
+import com.medportal.Medical.response.DoctorResponse;
 import com.medportal.Medical.services.impl.DoctorServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,6 +55,13 @@ public class DoctorController {
       //  logger.info(doctorDTO.toString());
         return doctorServiceImpl.saveDoctor(doctorDTO);
     }
+
+    @GetMapping("/appointment")
+    public List<DoctorResponse> getDoctorForAppointment(){
+        return doctorServiceImpl.getAllDoctorsForAppointments();
+    }
+
+
 
 
 

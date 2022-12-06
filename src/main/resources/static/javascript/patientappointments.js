@@ -4,7 +4,7 @@ const patientId = cookieArr[1];
 
 //DOM Elements
 const submitForm = document.getElementById("request-form")
-const appointmentContainer = document.getElementById("appointment-container") // By ID
+const appointmentContainer = document.getElementById("request-container") // By ID
 
 
 const headers = {
@@ -12,23 +12,32 @@ const headers = {
 }
 
 const baseUrl = "http://localhost:8080/api/v1/appointments/"
+const doctorsUrl = "http://localhost:8080/api/doctors/appointment"
 
 const handleSubmit = async (e) => {
     e.preventDefault()
 //    let today = new Date();
 
 //    const imageUrl = await uploadImage();
+   // console.log(document.getElementById('doctors').options[document.getElementById('doctors').selectedIndex].value)
+    let info = (document.getElementById('doctors').options[document.getElementById('doctors').selectedIndex].value)
+    let id = JSON.parse(info).id
+    console.log(id)
+
+
 
     let bodyObj = {
         department: document.getElementById("department").value,
         appcategory: document.getElementById("appcategory").value,
-//        doctor: document.getElementById("doctorA").value,
+        doctor_id: id,
         status: "upcoming"
     }
 
     await addAppointment(bodyObj);
 
 }
+
+
 
 async function addAppointment(obj) {
     const response = await fetch(`${baseUrl}patient/${patientId}`, {
@@ -65,30 +74,49 @@ async function handleDelete(appointmentId){
     return getAppointments(patientId);
 }
 
+async function getDoctors() {
+  console.log("started get requests")
+    await fetch(`${doctorsUrl}`, {
+        method: "GET",
+        headers: headers
+    })
+        .then(response => response.json())
+        .then(data => displayDoctors(data))
+        .catch(err => console.error(err))
+}
+
+const displayDoctors = (array) => {
+//    console.log(array);
+//    for(let i = 0; i < array.length; i++){
+//        console.log(array[i].id);
+//    }
+    let doctors = document.getElementById("doctors");
+    Object.keys(array).map((key) => doctors.add(new Option(array[key].firstName + " " + array[key].lastName,
+    JSON.stringify(array[key]))));
+}
+
 
 const createAppointmentCards = (array) => {
     console.log("Started create request cards")
     appointmentContainer.innerHTML = ''
     array.forEach(obj => {
         if(obj.status=="upcoming") {
-            let appointmentCard = document.createElement("div")
-            appointmentCard.classList.add("col")
-            appointmentCard.innerHTML = `
+            let requestCard = document.createElement("div")
+            requestCard.classList.add("col")
+            requestCard.innerHTML = `
                 <div class="card d-flex" style="width: flex; height: 5rem;">
                     <div class="card-body d-flex flex-column  justify-content-between" style="height: available">
                         <p class="card-text"><b></b> ${obj.department}</p>
                         <p class="card-text"><b></b> ${obj.appcategory}</p>
-//                        <p class="card-text"><b>Doctor:</b> ${obj.doctorA}</p>
                         <p class="card-text"><b>Time:</b> ${obj.time}</p>
-                        <p class="card-text"><b>Date:</b> ${obj.tate}</p>
-                        <img class="card-img-bottom" src="${obj.description}">
+                        <p class="card-text"><b>Date:</b> ${obj.date}</p>
                         <div class="d-flex justify-content-end">
                           <button class="btn btn-delete right" onclick="handleDelete(${obj.id})">Delete</button>
                         </div>
                     </div>
                 </div>
             `
-            appointmentContainer.append(appointmentCard)
+            appointmentContainer.append(requestCard)
         }
     })
 }
@@ -101,4 +129,6 @@ function handleLogout(){
     }
 }
 
+getAppointments(patientId)
+getDoctors();
 submitForm.addEventListener("submit", handleSubmit)

@@ -33,6 +33,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<Appointment> appointmentOptional = appointmentRepository.findAll();
         return appointmentOptional.stream().map(appointment -> new AppointmentDTO(appointment)).collect(Collectors.toList());
     }
+
+
+
     @Override
     public List<AppointmentDTO> getAllAppointmentsByPatientId(Long patientId){
         Optional<Patient> patientOptional = patientRepository.findById(patientId);
@@ -55,11 +58,10 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    @Transactional
     public AppointmentDTO addAppointment(AppointmentDTO appointmentDto, Long patientId) {
         Optional<Patient> patientOptional = patientRepository.findById(patientId);
 
-        Optional<Doctor> doctorOptional = doctorRepository.findById((long) 5);
+        Optional<Doctor> doctorOptional = doctorRepository.findById((appointmentDto.getDoctor_id()));
 
         if(patientOptional.isPresent()){
             Patient patient = patientOptional.get();
@@ -68,6 +70,7 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointment.setPatient(patientOptional.get());
             patient.getAppointmentSet().add(appointment);
             doctorOptional.get().getAppointmentSet().add(appointment);
+            patient.setAssignedDoctor(doctorOptional.get());
             doctorRepository.save(doctorOptional.get());
             appointmentRepository.save(appointment);
             patientRepository.save(patient);
